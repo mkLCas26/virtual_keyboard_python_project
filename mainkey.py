@@ -13,7 +13,7 @@ cap.set(3,1280)
 cap.set(4,720)
 
 # hand detection + keyboard letters + text var initialization
-detector = HandDetector(detectionCon= int(0.8 * 100) , maxHands=2)
+detector = HandDetector(detectionCon=0.8 , maxHands=2)
 keys = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L", ":"],
         ["Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"]]
@@ -45,9 +45,10 @@ for i in range(len(keys)):
 while True:
     success, img = cap.read()
     # img = detector.findHands(img)
-    hands, img = detector.findHands(img)       # debug trial to match cvzone and mediapipe version
+    hands, img = detector.findHands(img, flipType=False)       # debug trial to match cvzone and mediapipe version + updated function usage
     if hands:
         lmList = hands[0]["lmList"]
+        bbox = hands[0]['bbox']
     else:
         lmList = []
 
