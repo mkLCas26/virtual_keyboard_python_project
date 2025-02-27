@@ -63,7 +63,7 @@ while True:
             if x < lmList[8][0] < x + w and y < lmList[8][1] < y + h:
                  cv2.rectangle(img, button.pos, (x + w, y + h), (175, 0, 175), cv2.FILLED)
                  cv2.putText(img, button.text, (x + 25, y + 60), cv2.FONT_HERSHEY_PLAIN, 4, (255, 255, 255), 4)
-                 l, _, _ = detector.findDistance(8, 12, img, draw=False)
+                 l, _, _ = detector.findDistance(lmList[8], lmList[12], draw=False)
                  print(l)
 
                  if l<30:
@@ -74,7 +74,7 @@ while True:
 
     #for textbox           
     cv2.rectangle(img, (50, 350), (700, 450), (175, 0, 175), cv2.FILLED)
-    cv2.putText(img, button.text, (x + 25, y + 60), cv2.FONT_HERSHEY_PLAIN, 4, (255, 255, 255), 4)
+    cv2.putText(img, finalText, (75, 420), cv2.FONT_HERSHEY_PLAIN, 5, (255, 255, 255), 5)
     
     cv2.imshow("Image", img)
     cv2.waitKey(1)
