@@ -13,7 +13,7 @@ cap.set(3,1280)
 cap.set(4,720)
 
 # hand detection + keyboard letters + text var initialization
-detector = HandDetector(detectionCon=0.8 , maxHands=2)
+detector = HandDetector(detectionCon= int(0.8 * 100) , maxHands=2)
 keys = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L", ":"],
         ["Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"]]
