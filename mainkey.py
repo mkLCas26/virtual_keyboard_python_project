@@ -3,6 +3,7 @@
 
 import cv2 
 from cvzone.HandTrackingModule import HandDetector
+from time import sleep
 
 cap = cv2.VideoCapture(0)
 cap.set(3,1280)
@@ -12,6 +13,8 @@ detector = HandDetector(detectionCon=int(0.8 * 100), maxHands=2)
 keys = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L", ":"],
         ["Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"]]
+finalText = ""
+
 
 def drawALL(img, buttonList):
     for button in buttonList:
@@ -55,6 +58,11 @@ while True:
                  if l<30:
                     cv2.rectangle(img, button.pos, (x + w, y + h), (0, 255, 0), cv2.FILLED)
                     cv2.putText(img, button.text, (x + 25, y + 60), cv2.FONT_HERSHEY_PLAIN, 4, (255, 255, 255), 4)
-
+                    finalText += button.text
+                    sleep(0.15)
+                
+    cv2.rectangle(img, (50, 350), (700, 450), (175, 0, 175), cv2.FILLED)
+    cv2.putText(img, button.text, (x + 25, y + 60), cv2.FONT_HERSHEY_PLAIN, 4, (255, 255, 255), 4)
+    
     cv2.imshow("Image", img)
     cv2.waitKey(1)
