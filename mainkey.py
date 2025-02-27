@@ -13,7 +13,7 @@ cap.set(3,1280)
 cap.set(4,720)
 
 # hand detection + keyboard letters + text var initialization
-detector = HandDetector(detectionCon=int(0.8 * 100), maxHands=2)
+detector = HandDetector(detectionCon=0.8 , maxHands=2)
 keys = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L", ":"],
         ["Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"]]
@@ -44,8 +44,14 @@ for i in range(len(keys)):
 # for function of the whole keyboard
 while True:
     success, img = cap.read()
-    img = detector.findHands(img)
-    lmList, bboxInfo = detector.findPosition(img)
+    # img = detector.findHands(img)
+    hands, img = detector.findHands(img)       # debug trial to match cvzone and mediapipe version
+    if hands:
+        lmList = hands[0]["lmList"]
+    else:
+        lmList = []
+
+    #lmList, bboxInfo = detector.findPosition(img)
     img = drawALL(img, buttonList)
 
     # for setting clicks using finger landmarks in media pipe
