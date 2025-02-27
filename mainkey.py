@@ -44,6 +44,11 @@ for i in range(len(keys)):
 # for function of the whole keyboard
 while True:
     success, img = cap.read()
+
+    if not success:
+        print("Failed to grab Camera")
+        break
+
     img = cv2.flip(img,1)
 
     hands, img = detector.findHands(img, flipType=False)       # debug trial to match cvzone and mediapipe version + updated function usage
@@ -71,7 +76,7 @@ while True:
                     cv2.rectangle(img, button.pos, (x + w, y + h), (0, 255, 0), cv2.FILLED)
                     cv2.putText(img, button.text, (x + 25, y + 60), cv2.FONT_HERSHEY_PLAIN, 4, (255, 255, 255), 4)
                     finalText += button.text
-                    sleep(0.15)
+                    sleep(0.90)
 
     #for textbox           
     cv2.rectangle(img, (50, 350), (700, 450), (175, 0, 175), cv2.FILLED)
@@ -80,8 +85,8 @@ while True:
     cv2.imshow("Image", img)
 
     # For easy dialog box exit : via pressing "q"
-    if cv2.waitKey(1) & 0xFF == ord('q')
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-    cap.release()
-    cv2.destroyAllWindows()
+cap.release()
+cv2.destroyAllWindows()
