@@ -44,7 +44,8 @@ for i in range(len(keys)):
 # for function of the whole keyboard
 while True:
     success, img = cap.read()
-    # img = detector.findHands(img)
+    img = cv2.flip(img,1)
+
     hands, img = detector.findHands(img, flipType=False)       # debug trial to match cvzone and mediapipe version + updated function usage
     if hands:
         lmList = hands[0]["lmList"]
@@ -52,7 +53,6 @@ while True:
     else:
         lmList = []
 
-    #lmList, bboxInfo = detector.findPosition(img)
     img = drawALL(img, buttonList)
 
     # for setting clicks using finger landmarks in media pipe
@@ -78,4 +78,10 @@ while True:
     cv2.putText(img, finalText, (75, 420), cv2.FONT_HERSHEY_PLAIN, 5, (255, 255, 255), 5)
     
     cv2.imshow("Image", img)
-    cv2.waitKey(1)
+
+    # For easy dialog box exit : via pressing "q"
+    if cv2.waitKey(1) & 0xFF == ord('q')
+        break
+
+    cap.release()
+    cv2.destroyAllWindows()
