@@ -1,13 +1,18 @@
 # Project Title: AI Virtual Keyboard using Python
 # Date Started: Feb 27, 2025
 
-import cv2
+import cv2 
+from cvzone.HandTrackingModule import HandDetector
 
 cap = cv2.VideoCapture(0)
 cap.set(3,1280)
 cap.set(4,720)
 
+detector = HandDetector(detectionCon=int(0.8 * 100), maxHands=2)
+
 while True:
     success, img = cap.read()
+    img = detector.findHands(img)
+    lmList, bboxInfo = detector.findPosition(img)
     cv2.imshow("Image", img)
     cv2.waitKey(1)
